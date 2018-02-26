@@ -9,7 +9,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <dse.version>5.0.12</dse.version>
+    <dse.version>5.0.10</dse.version>
     <scala.version>2.10.6</scala.version>
     <scala.main.version>2.10</scala.main.version>
     <scalatest.version>3.0.0</scalatest.version>
@@ -33,19 +33,19 @@
           <groupId>javax.servlet</groupId>
           <artifactId>*</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>com.datastax.cassandra</groupId>
+          <artifactId>cassandra-driver-core</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <!-- Your dependencies, 'provided' are not included in jar -->
-    <!--<dependency>-->
-      <!--<groupId>org.apache.commons</groupId>-->
-      <!--<artifactId>commons-math3</artifactId>-->
-      <!--<version>3.6.1</version>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>org.apache.commons</groupId>-->
-      <!--<artifactId>commons-csv</artifactId>-->
-      <!--<version>1.0</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>com.datastax.cassandra</groupId>
+      <artifactId>cassandra-driver-core</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
 
     <!-- Test Dependencies -->
     <dependency>
@@ -111,12 +111,12 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <!--<relocations>-->
-                <!--<relocation>-->
-                  <!--<pattern>org.apache.commons.csv</pattern>-->
-                  <!--<shadedPattern>shaded.org.apache.commons.csv</shadedPattern>-->
-                <!--</relocation>-->
-              <!--</relocations>-->
+              <relocations>
+                <relocation>
+                  <pattern>com.datastax.driver</pattern>
+                  <shadedPattern>shaded.com.datastax.driver</shadedPattern>
+                </relocation>
+              </relocations>
             </configuration>
           </execution>
         </executions>
